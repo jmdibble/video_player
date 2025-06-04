@@ -54,4 +54,38 @@ class BetterPlayerSubtitlesConfiguration {
     this.alignment = Alignment.center,
     this.backgroundColor = Colors.transparent,
   });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! BetterPlayerSubtitlesConfiguration) return false;
+    return fontSize == other.fontSize &&
+        fontColor == other.fontColor &&
+        outlineEnabled == other.outlineEnabled &&
+        outlineColor == other.outlineColor &&
+        outlineSize == other.outlineSize &&
+        fontFamily == other.fontFamily &&
+        leftPadding == other.leftPadding &&
+        rightPadding == other.rightPadding &&
+        bottomPadding == other.bottomPadding &&
+        textAlign == other.textAlign &&
+        alignment == other.alignment &&
+        backgroundColor == other.backgroundColor;
+  }
+
+  @override
+  int get hashCode => Object.hash(
+        fontSize,
+        fontColor,
+        outlineEnabled,
+        outlineColor,
+        outlineSize,
+        fontFamily,
+        leftPadding,
+        rightPadding,
+        bottomPadding,
+        textAlign,
+        alignment,
+        backgroundColor,
+      );
 }

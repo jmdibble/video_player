@@ -18,7 +18,7 @@ class BetterPlayerConfiguration {
   /// When the video playback runs  into an error, you can build a custom
   /// error message.
   final Widget Function(BuildContext context, String? errorMessage)?
-  errorBuilder;
+      errorBuilder;
 
   /// The Aspect Ratio of the Video. Important to get the correct size of the
   /// video!
@@ -208,8 +208,7 @@ class BetterPlayerConfiguration {
           deviceOrientationsOnFullScreen ?? this.deviceOrientationsOnFullScreen,
       systemOverlaysAfterFullScreen:
           systemOverlaysAfterFullScreen ?? this.systemOverlaysAfterFullScreen,
-      deviceOrientationsAfterFullScreen:
-          deviceOrientationsAfterFullScreen ??
+      deviceOrientationsAfterFullScreen: deviceOrientationsAfterFullScreen ??
           this.deviceOrientationsAfterFullScreen,
       routePageBuilder: routePageBuilder ?? this.routePageBuilder,
       eventListener: eventListener ?? this.eventListener,
@@ -219,17 +218,89 @@ class BetterPlayerConfiguration {
           controlsConfiguration ?? this.controlsConfiguration,
       fit: fit ?? this.fit,
       rotation: rotation ?? this.rotation,
-      playerVisibilityChangedBehavior:
-          playerVisibilityChangedBehavior ??
+      playerVisibilityChangedBehavior: playerVisibilityChangedBehavior ??
           this.playerVisibilityChangedBehavior,
       translations: translations ?? this.translations,
       autoDetectFullscreenDeviceOrientation:
           autoDetectFullscreenDeviceOrientation ??
-          this.autoDetectFullscreenDeviceOrientation,
+              this.autoDetectFullscreenDeviceOrientation,
       handleLifecycle: handleLifecycle ?? this.handleLifecycle,
       autoDispose: autoDispose ?? this.autoDispose,
       expandToFill: expandToFill ?? this.expandToFill,
       useRootNavigator: useRootNavigator ?? this.useRootNavigator,
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! BetterPlayerConfiguration) return false;
+    return autoPlay == other.autoPlay &&
+        startAt == other.startAt &&
+        looping == other.looping &&
+        errorBuilder == other.errorBuilder &&
+        aspectRatio == other.aspectRatio &&
+        placeholder == other.placeholder &&
+        showPlaceholderUntilPlay == other.showPlaceholderUntilPlay &&
+        placeholderOnTop == other.placeholderOnTop &&
+        overlay == other.overlay &&
+        fullScreenByDefault == other.fullScreenByDefault &&
+        allowedScreenSleep == other.allowedScreenSleep &&
+        fullScreenAspectRatio == other.fullScreenAspectRatio &&
+        deviceOrientationsOnFullScreen ==
+            other.deviceOrientationsOnFullScreen &&
+        systemOverlaysAfterFullScreen == other.systemOverlaysAfterFullScreen &&
+        deviceOrientationsAfterFullScreen ==
+            other.deviceOrientationsAfterFullScreen &&
+        routePageBuilder == other.routePageBuilder &&
+        eventListener == other.eventListener &&
+        subtitlesConfiguration == other.subtitlesConfiguration &&
+        controlsConfiguration == other.controlsConfiguration &&
+        fit == other.fit &&
+        rotation == other.rotation &&
+        playerVisibilityChangedBehavior ==
+            other.playerVisibilityChangedBehavior &&
+        translations == other.translations &&
+        autoDetectFullscreenDeviceOrientation ==
+            other.autoDetectFullscreenDeviceOrientation &&
+        autoDetectFullscreenAspectRatio ==
+            other.autoDetectFullscreenAspectRatio &&
+        handleLifecycle == other.handleLifecycle &&
+        autoDispose == other.autoDispose &&
+        expandToFill == other.expandToFill &&
+        useRootNavigator == other.useRootNavigator;
+  }
+
+  @override
+  int get hashCode => Object.hashAll([
+        autoPlay,
+        startAt,
+        looping,
+        errorBuilder,
+        aspectRatio,
+        placeholder,
+        showPlaceholderUntilPlay,
+        placeholderOnTop,
+        overlay,
+        fullScreenByDefault,
+        allowedScreenSleep,
+        fullScreenAspectRatio,
+        deviceOrientationsOnFullScreen,
+        systemOverlaysAfterFullScreen,
+        deviceOrientationsAfterFullScreen,
+        routePageBuilder,
+        eventListener,
+        subtitlesConfiguration,
+        controlsConfiguration,
+        fit,
+        rotation,
+        playerVisibilityChangedBehavior,
+        translations,
+        autoDetectFullscreenDeviceOrientation,
+        autoDetectFullscreenAspectRatio,
+        handleLifecycle,
+        autoDispose,
+        expandToFill,
+        useRootNavigator,
+      ]);
 }
