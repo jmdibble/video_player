@@ -19,6 +19,7 @@ class _DashPageState extends State<DashPage> {
       Constants.dashStreamUrl,
       useAsmsSubtitles: true,
       useAsmsTracks: true,
+      videoFormat: BetterPlayerVideoFormat.dash,
     );
     _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
     _betterPlayerController.setupDataSource(dataSource);
