@@ -1,4 +1,4 @@
-import 'package:awesome_video_player/awesome_video_player.dart';
+import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 
 class CustomControlsWidget extends StatefulWidget {
@@ -75,7 +75,8 @@ class _CustomControlsWidgetState extends State<CustomControlsWidget> {
                           setState(() {
                             if (widget.controller!.isPlaying()!) {
                               Duration rewindDuration = Duration(
-                                  seconds: (videoDuration!.inSeconds - 2));
+                                seconds: (videoDuration!.inSeconds - 2),
+                              );
                               if (rewindDuration <
                                   widget.controller!.videoPlayerController!
                                       .value.duration!) {
@@ -86,10 +87,7 @@ class _CustomControlsWidgetState extends State<CustomControlsWidget> {
                             }
                           });
                         },
-                        child: Icon(
-                          Icons.fast_rewind,
-                          color: Colors.white,
-                        ),
+                        child: Icon(Icons.fast_rewind, color: Colors.white),
                       ),
                       InkWell(
                         onTap: () {
@@ -114,7 +112,8 @@ class _CustomControlsWidgetState extends State<CustomControlsWidget> {
                           setState(() {
                             if (widget.controller!.isPlaying()!) {
                               Duration forwardDuration = Duration(
-                                  seconds: (videoDuration!.inSeconds + 2));
+                                seconds: (videoDuration!.inSeconds + 2),
+                              );
                               if (forwardDuration >
                                   widget.controller!.videoPlayerController!
                                       .value.duration!) {
@@ -126,10 +125,7 @@ class _CustomControlsWidgetState extends State<CustomControlsWidget> {
                             }
                           });
                         },
-                        child: Icon(
-                          Icons.fast_forward,
-                          color: Colors.white,
-                        ),
+                        child: Icon(Icons.fast_forward, color: Colors.white),
                       ),
                     ],
                   ),

@@ -1,6 +1,6 @@
-import 'package:awesome_video_player/awesome_video_player.dart';
-import 'package:awesome_video_player_example/constants.dart';
-import 'package:awesome_video_player_example/pages/custom_controls/custom_controls_widget.dart';
+import 'package:video_player/video_player.dart';
+import 'package:video_player_example/constants.dart';
+import 'package:video_player_example/pages/custom_controls/custom_controls_widget.dart';
 import 'package:flutter/material.dart';
 
 class ChangePlayerThemePage extends StatefulWidget {
@@ -17,8 +17,10 @@ class _ChangePlayerThemePageState extends State<ChangePlayerThemePage> {
   void initState() {
     super.initState();
     String url = Constants.bugBuckBunnyVideoUrl;
-    _dataSource =
-        BetterPlayerDataSource(BetterPlayerDataSourceType.network, url);
+    _dataSource = BetterPlayerDataSource(
+      BetterPlayerDataSourceType.network,
+      url,
+    );
     _betterPlayerController = new BetterPlayerController(
       BetterPlayerConfiguration(
         autoDispose: true,
@@ -33,9 +35,7 @@ class _ChangePlayerThemePageState extends State<ChangePlayerThemePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Change player theme"),
-      ),
+      appBar: AppBar(title: Text("Change player theme")),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -48,9 +48,7 @@ class _ChangePlayerThemePageState extends State<ChangePlayerThemePage> {
                 style: TextStyle(fontSize: 16),
               ),
             ),
-            BetterPlayer(
-              controller: _betterPlayerController,
-            ),
+            BetterPlayer(controller: _betterPlayerController),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -65,8 +63,8 @@ class _ChangePlayerThemePageState extends State<ChangePlayerThemePage> {
                           autoDispose: true,
                           controlsConfiguration:
                               BetterPlayerControlsConfiguration(
-                            playerTheme: _playerTheme,
-                          ),
+                                playerTheme: _playerTheme,
+                              ),
                         ),
                         betterPlayerDataSource: _dataSource,
                       );
@@ -84,8 +82,8 @@ class _ChangePlayerThemePageState extends State<ChangePlayerThemePage> {
                           autoDispose: true,
                           controlsConfiguration:
                               BetterPlayerControlsConfiguration(
-                            playerTheme: _playerTheme,
-                          ),
+                                playerTheme: _playerTheme,
+                              ),
                         ),
                         betterPlayerDataSource: _dataSource,
                       );
@@ -103,15 +101,15 @@ class _ChangePlayerThemePageState extends State<ChangePlayerThemePage> {
                           autoDispose: true,
                           controlsConfiguration:
                               BetterPlayerControlsConfiguration(
-                            playerTheme: _playerTheme,
-                            customControlsBuilder:
-                                (controller, onControlsVisibilityChanged) =>
-                                    CustomControlsWidget(
-                              controller: controller,
-                              onControlsVisibilityChanged:
-                                  onControlsVisibilityChanged,
-                            ),
-                          ),
+                                playerTheme: _playerTheme,
+                                customControlsBuilder:
+                                    (controller, onControlsVisibilityChanged) =>
+                                        CustomControlsWidget(
+                                          controller: controller,
+                                          onControlsVisibilityChanged:
+                                              onControlsVisibilityChanged,
+                                        ),
+                              ),
                         ),
                         betterPlayerDataSource: _dataSource,
                       );
@@ -119,7 +117,7 @@ class _ChangePlayerThemePageState extends State<ChangePlayerThemePage> {
                   },
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

@@ -1,5 +1,5 @@
-import 'package:awesome_video_player/awesome_video_player.dart';
-import 'package:awesome_video_player_example/constants.dart';
+import 'package:video_player/video_player.dart';
+import 'package:video_player_example/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -16,15 +16,15 @@ class _NormalPlayerPageState extends State<NormalPlayerPage> {
   void initState() {
     BetterPlayerConfiguration betterPlayerConfiguration =
         BetterPlayerConfiguration(
-      aspectRatio: 16 / 9,
-      fit: BoxFit.contain,
-      autoPlay: true,
-      looping: true,
-      deviceOrientationsAfterFullScreen: [
-        DeviceOrientation.portraitDown,
-        DeviceOrientation.portraitUp
-      ],
-    );
+          aspectRatio: 16 / 9,
+          fit: BoxFit.contain,
+          autoPlay: true,
+          looping: true,
+          deviceOrientationsAfterFullScreen: [
+            DeviceOrientation.portraitDown,
+            DeviceOrientation.portraitUp,
+          ],
+        );
     _betterPlayerDataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
       Constants.forBiggerBlazesUrl,
@@ -37,9 +37,7 @@ class _NormalPlayerPageState extends State<NormalPlayerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Normal player page"),
-      ),
+      appBar: AppBar(title: Text("Normal player page")),
       body: Column(
         children: [
           const SizedBox(height: 8),

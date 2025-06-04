@@ -1,4 +1,4 @@
-import 'package:awesome_video_player/src/configuration/better_player_drm_type.dart';
+import 'package:video_player/src/configuration/better_player_drm_type.dart';
 
 ///Configuration of DRM used to protect data source
 class BetterPlayerDrmConfiguration {
@@ -20,11 +20,12 @@ class BetterPlayerDrmConfiguration {
   ///Additional headers send with auth request, used only for WIDEVINE DRM
   final Map<String, String>? headers;
 
-  BetterPlayerDrmConfiguration(
-      {this.drmType,
-      this.token,
-      this.licenseUrl,
-      this.certificateUrl,
-      this.headers,
-      this.clearKey});
+  BetterPlayerDrmConfiguration({
+    this.drmType,
+    this.token,
+    this.licenseUrl,
+    this.certificateUrl,
+    this.headers,
+    this.clearKey,
+  });
 }

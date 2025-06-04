@@ -1,9 +1,9 @@
-import 'package:awesome_video_player/src/configuration/better_player_buffering_configuration.dart';
-import 'package:awesome_video_player/src/configuration/better_player_data_source_type.dart';
-import 'package:awesome_video_player/src/configuration/better_player_drm_configuration.dart';
-import 'package:awesome_video_player/src/configuration/better_player_notification_configuration.dart';
-import 'package:awesome_video_player/src/configuration/better_player_video_format.dart';
-import 'package:awesome_video_player/src/subtitles/better_player_subtitles_source.dart';
+import 'package:video_player/src/configuration/better_player_buffering_configuration.dart';
+import 'package:video_player/src/configuration/better_player_data_source_type.dart';
+import 'package:video_player/src/configuration/better_player_drm_configuration.dart';
+import 'package:video_player/src/configuration/better_player_notification_configuration.dart';
+import 'package:video_player/src/configuration/better_player_video_format.dart';
+import 'package:video_player/src/subtitles/better_player_subtitles_source.dart';
 import 'package:flutter/widgets.dart';
 
 import 'better_player_cache_configuration.dart';
@@ -94,9 +94,7 @@ class BetterPlayerDataSource {
     this.resolutions,
     this.cacheConfiguration,
     this.notificationConfiguration =
-        const BetterPlayerNotificationConfiguration(
-      showNotification: false,
-    ),
+        const BetterPlayerNotificationConfiguration(showNotification: false),
     this.overriddenDuration,
     this.videoFormat,
     this.videoExtension,
@@ -105,11 +103,12 @@ class BetterPlayerDataSource {
     this.bufferingConfiguration = const BetterPlayerBufferingConfiguration(),
     this.allowedScreenSleep,
   }) : assert(
-            (type == BetterPlayerDataSourceType.network ||
-                    type == BetterPlayerDataSourceType.file) ||
-                (type == BetterPlayerDataSourceType.memory &&
-                    bytes?.isNotEmpty == true),
-            "Url can't be null in network or file data source | bytes can't be null when using memory data source");
+         (type == BetterPlayerDataSourceType.network ||
+                 type == BetterPlayerDataSourceType.file) ||
+             (type == BetterPlayerDataSourceType.memory &&
+                 bytes?.isNotEmpty == true),
+         "Url can't be null in network or file data source | bytes can't be null when using memory data source",
+       );
 
   ///Factory method to build network data source which uses url as data source
   ///Bytes parameter is not used in this data source.

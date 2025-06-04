@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:awesome_video_player/awesome_video_player.dart';
-import 'package:awesome_video_player_example/constants.dart';
+import 'package:video_player/video_player.dart';
+import 'package:video_player_example/constants.dart';
 import 'package:flutter/material.dart';
 
 class PlaceholderUntilPlayPage extends StatefulWidget {
@@ -26,10 +26,10 @@ class _PlaceholderUntilPlayPageState extends State<PlaceholderUntilPlayPage> {
   void initState() {
     BetterPlayerConfiguration betterPlayerConfiguration =
         BetterPlayerConfiguration(
-      fit: BoxFit.contain,
-      placeholder: _buildVideoPlaceholder(),
-      showPlaceholderUntilPlay: true,
-    );
+          fit: BoxFit.contain,
+          placeholder: _buildVideoPlaceholder(),
+          showPlaceholderUntilPlay: true,
+        );
     BetterPlayerDataSource dataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
       Constants.elephantDreamVideoUrl,
@@ -65,9 +65,7 @@ class _PlaceholderUntilPlayPageState extends State<PlaceholderUntilPlayPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Placeholder until play"),
-      ),
+      appBar: AppBar(title: Text("Placeholder until play")),
       body: Column(
         children: [
           const SizedBox(height: 8),
@@ -80,9 +78,7 @@ class _PlaceholderUntilPlayPageState extends State<PlaceholderUntilPlayPage> {
           ),
           AspectRatio(
             aspectRatio: 16 / 9,
-            child: BetterPlayer(
-              controller: _betterPlayerController,
-            ),
+            child: BetterPlayer(controller: _betterPlayerController),
           ),
         ],
       ),

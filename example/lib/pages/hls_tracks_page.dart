@@ -1,5 +1,5 @@
-import 'package:awesome_video_player/awesome_video_player.dart';
-import 'package:awesome_video_player_example/constants.dart';
+import 'package:video_player/video_player.dart';
+import 'package:video_player_example/constants.dart';
 import 'package:flutter/material.dart';
 
 class HlsTracksPage extends StatefulWidget {
@@ -13,10 +13,7 @@ class _HlsTracksPageState extends State<HlsTracksPage> {
   @override
   void initState() {
     BetterPlayerConfiguration betterPlayerConfiguration =
-        BetterPlayerConfiguration(
-      aspectRatio: 16 / 9,
-      fit: BoxFit.contain,
-    );
+        BetterPlayerConfiguration(aspectRatio: 16 / 9, fit: BoxFit.contain);
     BetterPlayerDataSource dataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
       Constants.hlsTestStreamUrl,
@@ -30,9 +27,7 @@ class _HlsTracksPageState extends State<HlsTracksPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("HLS tracks"),
-      ),
+      appBar: AppBar(title: Text("HLS tracks")),
       body: Column(
         children: [
           const SizedBox(height: 8),

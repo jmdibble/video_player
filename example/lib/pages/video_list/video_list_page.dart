@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:awesome_video_player_example/constants.dart';
-import 'package:awesome_video_player_example/model/video_list_data.dart';
+import 'package:video_player_example/constants.dart';
+import 'package:video_player_example/model/video_list_data.dart';
 import 'package:flutter/material.dart';
 
 import 'video_list_widget.dart';
@@ -41,27 +41,27 @@ class _VideoListPageState extends State<VideoListPage> {
       appBar: AppBar(title: Text("Video in list")),
       body: Container(
         color: Colors.grey,
-        child: Column(children: [
-          TextButton(
-            child: Text("Update page state"),
-            onPressed: () {
-              setState(() {
-                value++;
-              });
-            },
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: dataList.length,
-              itemBuilder: (context, index) {
-                VideoListData videoListData = dataList[index];
-                return VideoListWidget(
-                  videoListData: videoListData,
-                );
+        child: Column(
+          children: [
+            TextButton(
+              child: Text("Update page state"),
+              onPressed: () {
+                setState(() {
+                  value++;
+                });
               },
             ),
-          )
-        ]),
+            Expanded(
+              child: ListView.builder(
+                itemCount: dataList.length,
+                itemBuilder: (context, index) {
+                  VideoListData videoListData = dataList[index];
+                  return VideoListWidget(videoListData: videoListData);
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

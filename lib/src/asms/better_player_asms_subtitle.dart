@@ -1,4 +1,4 @@
-import 'package:awesome_video_player/src/asms/better_player_asms_subtitle_segment.dart';
+import 'package:video_player/src/asms/better_player_asms_subtitle_segment.dart';
 
 ///Representation of HLS / DASH subtitle element.
 class BetterPlayerAsmsSubtitle {

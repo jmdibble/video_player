@@ -1,5 +1,5 @@
-import 'package:awesome_video_player/awesome_video_player.dart';
-import 'package:awesome_video_player_example/constants.dart';
+import 'package:video_player/video_player.dart';
+import 'package:video_player_example/constants.dart';
 import 'package:flutter/material.dart';
 
 class OverriddenAspectRatioPage extends StatefulWidget {
@@ -14,12 +14,11 @@ class _OverriddenAspectRatioPageState extends State<OverriddenAspectRatioPage> {
   @override
   void initState() {
     BetterPlayerConfiguration betterPlayerConfiguration =
-        BetterPlayerConfiguration(
-      aspectRatio: 16 / 9,
-      fit: BoxFit.fill,
-    );
+        BetterPlayerConfiguration(aspectRatio: 16 / 9, fit: BoxFit.fill);
     BetterPlayerDataSource dataSource = BetterPlayerDataSource(
-        BetterPlayerDataSourceType.network, Constants.forBiggerBlazesUrl);
+      BetterPlayerDataSourceType.network,
+      Constants.forBiggerBlazesUrl,
+    );
     _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
     _betterPlayerController.setupDataSource(dataSource);
     _betterPlayerController.setOverriddenAspectRatio(1.0);
@@ -29,9 +28,7 @@ class _OverriddenAspectRatioPageState extends State<OverriddenAspectRatioPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Overridden aspect ratio"),
-      ),
+      appBar: AppBar(title: Text("Overridden aspect ratio")),
       body: Column(
         children: [
           const SizedBox(height: 8),

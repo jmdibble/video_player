@@ -1,5 +1,5 @@
-import 'package:awesome_video_player/awesome_video_player.dart';
-import 'package:awesome_video_player/src/core/better_player_with_controls.dart';
+import 'package:video_player/video_player.dart';
+import 'package:video_player/src/core/better_player_with_controls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -14,26 +14,22 @@ void main() {
   });
 
   setUp(() {
-    _mockController =
-        BetterPlayerMockController(const BetterPlayerConfiguration());
+    _mockController = BetterPlayerMockController(
+      const BetterPlayerConfiguration(),
+    );
   });
 
-  testWidgets(
-    "One of children is BetterPlayerWithControls",
-    (WidgetTester tester) async {
-      await tester.pumpWidget(
-        _wrapWidget(
-          BetterPlayer(
-            controller: _mockController,
-          ),
-        ),
-      );
-      expect(
-          find.byWidgetPredicate(
-              (widget) => widget is BetterPlayerWithControls),
-          findsOneWidget);
-    },
-  );
+  testWidgets("One of children is BetterPlayerWithControls", (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      _wrapWidget(BetterPlayer(controller: _mockController)),
+    );
+    expect(
+      find.byWidgetPredicate((widget) => widget is BetterPlayerWithControls),
+      findsOneWidget,
+    );
+  });
 }
 
 ///Wrap widget with material app to handle all features like navigation and

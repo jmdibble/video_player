@@ -1,5 +1,5 @@
-import 'package:awesome_video_player/awesome_video_player.dart';
-import 'package:awesome_video_player_example/constants.dart';
+import 'package:video_player/video_player.dart';
+import 'package:video_player_example/constants.dart';
 import 'package:flutter/material.dart';
 
 class ResolutionsPage extends StatefulWidget {
@@ -13,10 +13,7 @@ class _ResolutionsPageState extends State<ResolutionsPage> {
   @override
   void initState() {
     BetterPlayerConfiguration betterPlayerConfiguration =
-        BetterPlayerConfiguration(
-      aspectRatio: 16 / 9,
-      fit: BoxFit.contain,
-    );
+        BetterPlayerConfiguration(aspectRatio: 16 / 9, fit: BoxFit.contain);
     BetterPlayerDataSource dataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
       Constants.exampleResolutionsUrls.values.first,
@@ -30,24 +27,24 @@ class _ResolutionsPageState extends State<ResolutionsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Resolutions"),
-      ),
-      body: Column(children: [
-        const SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Text(
-            "Video with different resolutions to select. Click on overflow icon"
-            " (3 dots in right corner) and select different qualities.",
-            style: TextStyle(fontSize: 16),
+      appBar: AppBar(title: Text("Resolutions")),
+      body: Column(
+        children: [
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              "Video with different resolutions to select. Click on overflow icon"
+              " (3 dots in right corner) and select different qualities.",
+              style: TextStyle(fontSize: 16),
+            ),
           ),
-        ),
-        AspectRatio(
-          aspectRatio: 16 / 9,
-          child: BetterPlayer(controller: _betterPlayerController),
-        ),
-      ]),
+          AspectRatio(
+            aspectRatio: 16 / 9,
+            child: BetterPlayer(controller: _betterPlayerController),
+          ),
+        ],
+      ),
     );
   }
 }

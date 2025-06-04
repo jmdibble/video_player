@@ -1,4 +1,4 @@
-import 'package:awesome_video_player_example/pages/welcome_page.dart';
+import 'package:video_player_example/pages/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,13 +18,8 @@ class MyApp extends StatelessWidget {
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
-        supportedLocales: [
-          const Locale('en', 'US'),
-          const Locale('pl', 'PL'),
-        ],
-        theme: ThemeData(
-          primarySwatch: Colors.green,
-        ),
+        supportedLocales: [const Locale('en', 'US'), const Locale('pl', 'PL')],
+        theme: ThemeData(primarySwatch: Colors.green),
         home: WelcomePage(),
       ),
     );

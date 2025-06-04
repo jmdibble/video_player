@@ -1,5 +1,5 @@
-import 'package:awesome_video_player/awesome_video_player.dart';
-import 'package:awesome_video_player/src/core/better_player_utils.dart';
+import 'package:video_player/video_player.dart';
+import 'package:video_player/src/core/better_player_utils.dart';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
@@ -35,21 +35,21 @@ class BetterPlayerPlaylistState extends State<BetterPlayerPlaylist> {
   @override
   void initState() {
     _betterPlayerPlaylistController = BetterPlayerPlaylistController(
-        widget.betterPlayerDataSourceList,
-        betterPlayerConfiguration: widget.betterPlayerConfiguration,
-        betterPlayerPlaylistConfiguration:
-            widget.betterPlayerPlaylistConfiguration);
+      widget.betterPlayerDataSourceList,
+      betterPlayerConfiguration: widget.betterPlayerConfiguration,
+      betterPlayerPlaylistConfiguration:
+          widget.betterPlayerPlaylistConfiguration,
+    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: _betterPlayerController!.getAspectRatio() ??
+      aspectRatio:
+          _betterPlayerController!.getAspectRatio() ??
           BetterPlayerUtils.calculateAspectRatio(context),
-      child: BetterPlayer(
-        controller: _betterPlayerController!,
-      ),
+      child: BetterPlayer(controller: _betterPlayerController!),
     );
   }
 

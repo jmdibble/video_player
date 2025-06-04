@@ -1,6 +1,6 @@
-import 'package:awesome_video_player/awesome_video_player.dart';
-import 'package:awesome_video_player_example/constants.dart';
-import 'package:awesome_video_player_example/utils.dart';
+import 'package:video_player/video_player.dart';
+import 'package:video_player_example/constants.dart';
+import 'package:video_player_example/utils.dart';
 import 'package:flutter/material.dart';
 
 class BasicPlayerPage extends StatefulWidget {
@@ -12,9 +12,7 @@ class _BasicPlayerPageState extends State<BasicPlayerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Basic player"),
-      ),
+      appBar: AppBar(title: Text("Basic player")),
       body: Column(
         children: [
           const SizedBox(height: 8),
@@ -27,9 +25,7 @@ class _BasicPlayerPageState extends State<BasicPlayerPage> {
           ),
           AspectRatio(
             aspectRatio: 16 / 9,
-            child: BetterPlayer.network(
-              Constants.forBiggerBlazesUrl,
-            ),
+            child: BetterPlayer.network(Constants.forBiggerBlazesUrl),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -48,7 +44,7 @@ class _BasicPlayerPageState extends State<BasicPlayerPage> {
                 return const SizedBox();
               }
             },
-          )
+          ),
         ],
       ),
     );

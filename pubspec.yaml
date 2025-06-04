@@ -1,16 +1,15 @@
-name: awesome_video_player
-description: The name says it all :) Feature Rich Advanced video player for Flutter, supports DRM, Subtitles, Multi-audio/video streams, and is well maintained
-issue_tracker: https://github.com/nateshmbhat/awesome_video_player/issues
-repository: https://github.com/nateshmbhat/awesome_video_player
-version: 1.0.5
+name: video_player
+description: Feature Rich Advanced video player for Flutter, supports DRM, Subtitles, Multi-audio/video streams
+issue_tracker: https://github.com/orestesgaolin/video_player/issues
+repository: https://github.com/orestesgaolin/video_player
+version: 1.0.6
 topics:
   - video
   - videoplayer
   - drm
   - audio
   - hls
-homepage: https://github.com/nateshmbhat/awesome_video_player.git
-documentation: https://jhomlala.github.io/betterplayer/#/
+homepage: https://github.com/orestesgaolin/video_player
 
 environment:
   sdk: ">=3.1.0<4.0.0"
@@ -31,7 +30,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   lint: ^2.3.0
-  flutter_lints: ^3.0.2
+  flutter_lints: ^6.0.0
 
 flutter:
   plugin:

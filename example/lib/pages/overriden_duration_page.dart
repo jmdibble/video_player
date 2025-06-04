@@ -1,5 +1,5 @@
-import 'package:awesome_video_player/awesome_video_player.dart';
-import 'package:awesome_video_player_example/constants.dart';
+import 'package:video_player/video_player.dart';
+import 'package:video_player_example/constants.dart';
 import 'package:flutter/material.dart';
 
 class OverriddenDurationPage extends StatefulWidget {
@@ -14,10 +14,10 @@ class _OverriddenDurationPageState extends State<OverriddenDurationPage> {
   void initState() {
     BetterPlayerConfiguration betterPlayerConfiguration =
         BetterPlayerConfiguration(
-      aspectRatio: 16 / 9,
-      fit: BoxFit.contain,
-      handleLifecycle: true,
-    );
+          aspectRatio: 16 / 9,
+          fit: BoxFit.contain,
+          handleLifecycle: true,
+        );
     _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
     _setupDataSource();
     super.initState();
@@ -37,9 +37,7 @@ class _OverriddenDurationPageState extends State<OverriddenDurationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Overridden duration"),
-      ),
+      appBar: AppBar(title: Text("Overridden duration")),
       body: Column(
         children: [
           const SizedBox(height: 8),

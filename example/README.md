@@ -1,4 +1,4 @@
-# better_player_example
+# video_player_example
 
 A new Flutter application.
 

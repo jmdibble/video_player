@@ -1,5 +1,5 @@
-import 'package:awesome_video_player/src/hls/hls_parser/exception.dart';
-import 'package:awesome_video_player/src/hls/hls_parser/mime_types.dart';
+import 'package:video_player/src/hls/hls_parser/exception.dart';
+import 'package:video_player/src/hls/hls_parser/mime_types.dart';
 
 class LibUtil {
   static bool startsWith(List<int> source, List<int> checker) {
@@ -66,12 +66,13 @@ class LibUtil {
 
     //todo UTCではなくGMT?
     final DateTime dateTime = DateTime.utc(
-        int.parse(match.group(1)!),
-        int.parse(match.group(2)!),
-        int.parse(match.group(3)!),
-        int.parse(match.group(4)!),
-        int.parse(match.group(5)!),
-        int.parse(match.group(6)!));
+      int.parse(match.group(1)!),
+      int.parse(match.group(2)!),
+      int.parse(match.group(3)!),
+      int.parse(match.group(4)!),
+      int.parse(match.group(5)!),
+      int.parse(match.group(6)!),
+    );
     if (match.group(8)?.isNotEmpty == true) {
       //todo ここ実装再検討
     }

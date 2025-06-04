@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 import 'dart:async';
-import 'package:awesome_video_player/src/configuration/better_player_buffering_configuration.dart';
-import 'package:awesome_video_player/src/core/better_player_utils.dart';
+import 'package:video_player/src/configuration/better_player_buffering_configuration.dart';
+import 'package:video_player/src/core/better_player_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -42,10 +42,9 @@ class MethodChannelVideoPlayer extends VideoPlayerPlatform {
                 bufferingConfiguration.bufferForPlaybackAfterRebufferMs,
           });
 
-      response =
-          responseLinkedHashMap != null
-              ? Map<String, dynamic>.from(responseLinkedHashMap)
-              : null;
+      response = responseLinkedHashMap != null
+          ? Map<String, dynamic>.from(responseLinkedHashMap)
+          : null;
     }
     return response?['textureId'] as int?;
   }

@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #import "BetterPlayer.h"
-#import <awesome_video_player/awesome_video_player-Swift.h>
+#import <video_player/video_player-Swift.h>
 
 static void* timeRangeContext = &timeRangeContext;
 static void* statusContext = &statusContext;
