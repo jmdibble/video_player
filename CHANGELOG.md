@@ -1,6 +1,9 @@
 ### 1.0.6
 
 - forked from awesome_video_player at 1.0.5
+- make android build work again (fixes #1), update Java to 17, update AGP to 8.3.1, update gradle wrapper to 8.10
+- use correct foreground service type android:foregroundServiceType='mediaPlayback' and permission android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK (fixes #2)
+- handle HLS and Dash video formats in example app (fixes #3)
 
 ### 1.0.5
 
