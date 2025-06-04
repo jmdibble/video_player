@@ -7,5 +7,9 @@ Welcome to Better Player
 Hope you enjoy features in your new video player.
 
 3
-00:00:06.000 --> 00:00:10.000
+00:00:06.000 --> 00:00:08.000
+This is longer subtitle text across multiple lines of video.
+
+4
+00:00:08.000 --> 00:00:10.000
 Have fun!

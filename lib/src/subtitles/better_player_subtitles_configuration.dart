@@ -31,6 +31,9 @@ class BetterPlayerSubtitlesConfiguration {
   ///Bottom padding of the subtitle
   final double bottomPadding;
 
+  ///Text alignment of the subtitle when the subtitle spans more than one line
+  final TextAlign textAlign;
+
   ///Alignment of the subtitle
   final Alignment alignment;
 
@@ -47,6 +50,7 @@ class BetterPlayerSubtitlesConfiguration {
     this.leftPadding = 8.0,
     this.rightPadding = 8.0,
     this.bottomPadding = 20.0,
+    this.textAlign = TextAlign.center,
     this.alignment = Alignment.center,
     this.backgroundColor = Colors.transparent,
   });

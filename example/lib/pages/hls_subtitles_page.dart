@@ -47,6 +47,8 @@ class _HlsSubtitlesPageState extends State<HlsSubtitlesPage> {
       fit: BoxFit.contain,
       subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
         fontSize: 16.0,
+        alignment: Alignment.bottomCenter,
+        textAlign: TextAlign.center,
       ),
     );
     BetterPlayerDataSource dataSource = BetterPlayerDataSource(

@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:video_player/video_player.dart';
 import 'package:video_player/src/subtitles/better_player_subtitle.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 
 class BetterPlayerSubtitlesDrawer extends StatefulWidget {
   final List<BetterPlayerSubtitle> subtitles;
@@ -100,9 +99,8 @@ class _BetterPlayerSubtitlesDrawerState
     final BetterPlayerSubtitle? subtitle = _getSubtitleAtCurrentPosition();
     widget.betterPlayerController.renderedSubtitle = subtitle;
     final List<String> subtitles = subtitle?.texts ?? [];
-    final List<Widget> textWidgets = subtitles
-        .map((text) => _buildSubtitleTextWidget(text))
-        .toList();
+    final List<Widget> textWidgets =
+        subtitles.map((text) => _buildSubtitleTextWidget(text)).toList();
 
     return Container(
       height: double.infinity,
@@ -157,17 +155,21 @@ class _BetterPlayerSubtitlesDrawerState
       child: Stack(
         children: [
           if (_configuration!.outlineEnabled)
-            _buildHtmlWidget(subtitleText, _outerTextStyle)
+            Text(
+              subtitleText,
+              style: _outerTextStyle,
+              textAlign: _configuration!.textAlign,
+            )
           else
             const SizedBox(),
-          _buildHtmlWidget(subtitleText, _innerTextStyle),
+          Text(
+            subtitleText,
+            style: _innerTextStyle,
+            textAlign: _configuration!.textAlign,
+          )
         ],
       ),
     );
-  }
-
-  Widget _buildHtmlWidget(String text, TextStyle textStyle) {
-    return HtmlWidget(text, textStyle: textStyle);
   }
 
   BetterPlayerSubtitlesConfiguration setupDefaultConfiguration() {

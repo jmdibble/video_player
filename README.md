@@ -8,7 +8,7 @@ Fork of awesome_video_player which is a fork of better_player.
 
 - 📝 Playlist support
 - 📱 Video in ListView support
-- 💬 Subtitles support: (formats: SRT, WEBVTT with HTML tags support; subtitles from HLS; multiple subtitles for video)
+- 💬 Subtitles support: (formats: SRT, WEBVTT; subtitles from HLS; multiple subtitles for video), note: **not supporting HTML anymore**
 - 🔒 DRM support (token, Widevine, FairPlay EZDRM)
 - 📡 HTTP Headers support
 - 🖼️ BoxFit of video support
@@ -36,7 +36,7 @@ While other video player libraries come and go, Awesome Video Player is here to 
 | HLS Default Audio Stream Selection        | ✅       |
 | Audio Track Switching                     | ✅       |
 | Multi-Format Subtitles (SRT, WEBVTT, HLS) | ✅       |
-| HTML Tags in Subtitles                    | ✅       |
+| HTML Tags in Subtitles                    | ❌       |
 | Subtitle Style Customization              | ✅       |
 | Alternative Resolution Switching          | ✅       |
 | Picture in Picture                        | ✅       |

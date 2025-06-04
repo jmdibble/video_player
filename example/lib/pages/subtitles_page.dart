@@ -15,15 +15,16 @@ class _SubtitlesPageState extends State<SubtitlesPage> {
   void initState() {
     BetterPlayerConfiguration betterPlayerConfiguration =
         BetterPlayerConfiguration(
-          aspectRatio: 16 / 9,
-          fit: BoxFit.contain,
-          subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
-            backgroundColor: Colors.green,
-            fontColor: Colors.white,
-            outlineColor: Colors.black,
-            fontSize: 20,
-          ),
-        );
+      aspectRatio: 16 / 9,
+      fit: BoxFit.contain,
+      subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
+        backgroundColor: Colors.green,
+        fontColor: Colors.white,
+        outlineColor: Colors.black,
+        fontSize: 20,
+        textAlign: TextAlign.center,
+      ),
+    );
 
     _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
     _betterPlayerController.addEventsListener((event) {
