@@ -1,3 +1,13 @@
+### 1.0.7
+
+**Bug Fixes**
+
+- handle HLS subtitles that start with header WEBVTT e.g. from cloudflare, fixes #4
+
+**Refactor**
+
+- do not support html tags in the subtitles anymore, introduce support for text alignment using Flutter's Text widget
+
 ### 1.0.6
 
 - forked from awesome_video_player at 1.0.5
