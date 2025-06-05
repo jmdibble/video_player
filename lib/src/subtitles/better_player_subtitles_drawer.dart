@@ -24,9 +24,7 @@ class BetterPlayerSubtitlesDrawer extends StatefulWidget {
 
 class _BetterPlayerSubtitlesDrawerState
     extends State<BetterPlayerSubtitlesDrawer> {
-  final RegExp htmlRegExp =
-      // ignore: unnecessary_raw_strings
-      RegExp(r"<[^>]*>", multiLine: true);
+  final RegExp htmlRegExp = RegExp(r"<[^>]*>", multiLine: true);
   late TextStyle _innerTextStyle;
   late TextStyle _outerTextStyle;
 
@@ -39,6 +37,7 @@ class _BetterPlayerSubtitlesDrawerState
 
   @override
   void initState() {
+    super.initState();
     _visibilityStreamSubscription = widget.playerVisibilityStream.listen((
       state,
     ) {
@@ -46,16 +45,19 @@ class _BetterPlayerSubtitlesDrawerState
         _playerVisible = state;
       });
     });
+    widget.betterPlayerController.videoPlayerController!.addListener(
+      _updateState,
+    );
 
+    _initializeConfiguration();
+  }
+
+  void _initializeConfiguration() {
     if (widget.betterPlayerSubtitlesConfiguration != null) {
       _configuration = widget.betterPlayerSubtitlesConfiguration;
     } else {
       _configuration = setupDefaultConfiguration();
     }
-
-    widget.betterPlayerController.videoPlayerController!.addListener(
-      _updateState,
-    );
 
     _outerTextStyle = TextStyle(
       fontSize: _configuration!.fontSize,
@@ -71,8 +73,33 @@ class _BetterPlayerSubtitlesDrawerState
       color: _configuration!.fontColor,
       fontSize: _configuration!.fontSize,
     );
+  }
 
-    super.initState();
+  @override
+  void didUpdateWidget(covariant BetterPlayerSubtitlesDrawer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.betterPlayerSubtitlesConfiguration !=
+        widget.betterPlayerSubtitlesConfiguration) {
+      _initializeConfiguration();
+    }
+    if (oldWidget.betterPlayerController != widget.betterPlayerController) {
+      oldWidget.betterPlayerController.videoPlayerController!.removeListener(
+        _updateState,
+      );
+      widget.betterPlayerController.videoPlayerController!.addListener(
+        _updateState,
+      );
+    }
+    if (oldWidget.playerVisibilityStream != widget.playerVisibilityStream) {
+      _visibilityStreamSubscription.cancel();
+      _visibilityStreamSubscription = widget.playerVisibilityStream.listen((
+        state,
+      ) {
+        setState(() {
+          _playerVisible = state;
+        });
+      });
+    }
   }
 
   @override
