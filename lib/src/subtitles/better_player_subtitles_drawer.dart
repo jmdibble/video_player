@@ -129,15 +129,15 @@ class _BetterPlayerSubtitlesDrawerState
     final List<Widget> textWidgets =
         subtitles.map((text) => _buildSubtitleTextWidget(text)).toList();
 
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
+    return SizedBox.expand(
       child: SafeArea(
         bottom: _configuration!.useSafeArea,
         left: _configuration!.useSafeArea,
         right: _configuration!.useSafeArea,
         top: _configuration!.useSafeArea,
-        child: Padding(
+        child: AnimatedPadding(
+          duration: _configuration!.paddingAnimationDuration,
+          curve: _configuration!.paddingAnimationCurve,
           padding: EdgeInsets.only(
             bottom: _playerVisible
                 ? _configuration!.bottomPadding + _configuration!.playerHeight

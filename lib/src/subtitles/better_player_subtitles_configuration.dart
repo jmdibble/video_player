@@ -31,6 +31,12 @@ class BetterPlayerSubtitlesConfiguration {
   ///Bottom padding of the subtitle
   final double bottomPadding;
 
+  ///Duration of the padding animation when the subtitle moving
+  final Duration paddingAnimationDuration;
+
+  ///Curve of the padding animation when the subtitle moving
+  final Curve paddingAnimationCurve;
+
   ///Height of the player, used to calculate subtitle position
   final double playerHeight;
 
@@ -61,6 +67,8 @@ class BetterPlayerSubtitlesConfiguration {
     this.backgroundColor = Colors.transparent,
     this.playerHeight = 30.0,
     this.useSafeArea = true,
+    this.paddingAnimationDuration = const Duration(milliseconds: 300),
+    this.paddingAnimationCurve = Curves.easeInOut,
   });
 
   @override
@@ -80,7 +88,9 @@ class BetterPlayerSubtitlesConfiguration {
         alignment == other.alignment &&
         backgroundColor == other.backgroundColor &&
         playerHeight == other.playerHeight &&
-        useSafeArea == other.useSafeArea;
+        useSafeArea == other.useSafeArea &&
+        paddingAnimationDuration == other.paddingAnimationDuration &&
+        paddingAnimationCurve == other.paddingAnimationCurve;
   }
 
   @override
@@ -99,5 +109,7 @@ class BetterPlayerSubtitlesConfiguration {
         backgroundColor,
         playerHeight,
         useSafeArea,
+        paddingAnimationDuration,
+        paddingAnimationCurve,
       );
 }
