@@ -1,3 +1,14 @@
+### 1.0.8
+
+**Features**
+
+- use safe area and player height for subtitles positioning
+- use animated padding for subtitles moving
+
+**Refactor**
+
+- handle subtitles drawer configuration changes
+
 ### 1.0.7
 
 **Bug Fixes**

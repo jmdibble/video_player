@@ -2,7 +2,7 @@ name: video_player
 description: Feature Rich Advanced video player for Flutter, supports DRM, Subtitles, Multi-audio/video streams
 issue_tracker: https://github.com/orestesgaolin/video_player/issues
 repository: https://github.com/orestesgaolin/video_player
-version: 1.0.7
+version: 1.0.8
 topics:
   - video
   - videoplayer
