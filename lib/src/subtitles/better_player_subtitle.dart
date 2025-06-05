@@ -12,6 +12,9 @@ class BetterPlayerSubtitle {
   factory BetterPlayerSubtitle(String value, bool isWebVTT) {
     try {
       final scanner = value.split('\n');
+      if (scanner.isNotEmpty && scanner[0] == 'WEBVTT') {
+        return BetterPlayerSubtitle._();
+      }
       if (scanner.length == 2) {
         return _handle2LinesSubtitles(scanner);
       }
