@@ -103,12 +103,12 @@ class BetterPlayerDataSource {
     this.bufferingConfiguration = const BetterPlayerBufferingConfiguration(),
     this.allowedScreenSleep,
   }) : assert(
-         (type == BetterPlayerDataSourceType.network ||
-                 type == BetterPlayerDataSourceType.file) ||
-             (type == BetterPlayerDataSourceType.memory &&
-                 bytes?.isNotEmpty == true),
-         "Url can't be null in network or file data source | bytes can't be null when using memory data source",
-       );
+          (type == BetterPlayerDataSourceType.network ||
+                  type == BetterPlayerDataSourceType.file) ||
+              (type == BetterPlayerDataSourceType.memory &&
+                  bytes?.isNotEmpty == true),
+          "Url can't be null in network or file data source | bytes can't be null when using memory data source",
+        );
 
   ///Factory method to build network data source which uses url as data source
   ///Bytes parameter is not used in this data source.
@@ -131,6 +131,12 @@ class BetterPlayerDataSource {
     BetterPlayerBufferingConfiguration bufferingConfiguration =
         const BetterPlayerBufferingConfiguration(),
   }) {
+    final effectiveFormat = videoFormat ??
+        (url.endsWith(".m3u8")
+            ? BetterPlayerVideoFormat.hls
+            : url.endsWith(".mpd")
+                ? BetterPlayerVideoFormat.dash
+                : BetterPlayerVideoFormat.other);
     return BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
       url,
@@ -144,7 +150,7 @@ class BetterPlayerDataSource {
       cacheConfiguration: cacheConfiguration,
       notificationConfiguration: notificationConfiguration,
       overriddenDuration: overriddenDuration,
-      videoFormat: videoFormat,
+      videoFormat: effectiveFormat,
       drmConfiguration: drmConfiguration,
       placeholder: placeholder,
       bufferingConfiguration: bufferingConfiguration,
