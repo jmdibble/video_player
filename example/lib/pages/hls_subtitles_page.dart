@@ -51,8 +51,7 @@ class _HlsSubtitlesPageState extends State<HlsSubtitlesPage> {
         textAlign: TextAlign.center,
       ),
     );
-    BetterPlayerDataSource dataSource = BetterPlayerDataSource(
-      BetterPlayerDataSourceType.network,
+    BetterPlayerDataSource dataSource = BetterPlayerDataSource.network(
       Constants.hlsPlaylistUrl,
       useAsmsSubtitles: true,
       videoFormat: BetterPlayerVideoFormat.hls,

@@ -16,8 +16,7 @@ class _DrmPageState extends State<DrmPage> {
   void initState() {
     BetterPlayerConfiguration betterPlayerConfiguration =
         BetterPlayerConfiguration(aspectRatio: 16 / 9, fit: BoxFit.contain);
-    BetterPlayerDataSource _tokenDataSource = BetterPlayerDataSource(
-      BetterPlayerDataSourceType.network,
+    BetterPlayerDataSource _tokenDataSource = BetterPlayerDataSource.network(
       Constants.tokenEncodedHlsUrl,
       videoFormat: BetterPlayerVideoFormat.hls,
       drmConfiguration: BetterPlayerDrmConfiguration(

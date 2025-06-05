@@ -14,8 +14,7 @@ class _HlsAudioPageState extends State<HlsAudioPage> {
   void initState() {
     BetterPlayerConfiguration betterPlayerConfiguration =
         BetterPlayerConfiguration(aspectRatio: 16 / 9, fit: BoxFit.contain);
-    BetterPlayerDataSource dataSource = BetterPlayerDataSource(
-      BetterPlayerDataSourceType.network,
+    BetterPlayerDataSource dataSource = BetterPlayerDataSource.network(
       Constants.elephantDreamStreamUrl,
       videoFormat: BetterPlayerVideoFormat.hls,
     );

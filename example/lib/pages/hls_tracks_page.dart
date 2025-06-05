@@ -14,8 +14,7 @@ class _HlsTracksPageState extends State<HlsTracksPage> {
   void initState() {
     BetterPlayerConfiguration betterPlayerConfiguration =
         BetterPlayerConfiguration(aspectRatio: 16 / 9, fit: BoxFit.contain);
-    BetterPlayerDataSource dataSource = BetterPlayerDataSource(
-      BetterPlayerDataSourceType.network,
+    BetterPlayerDataSource dataSource = BetterPlayerDataSource.network(
       Constants.hlsTestStreamUrl,
       useAsmsSubtitles: true,
       videoFormat: BetterPlayerVideoFormat.hls,
