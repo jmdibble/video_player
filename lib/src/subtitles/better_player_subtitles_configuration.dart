@@ -31,6 +31,12 @@ class BetterPlayerSubtitlesConfiguration {
   ///Bottom padding of the subtitle
   final double bottomPadding;
 
+  ///Height of the player, used to calculate subtitle position
+  final double playerHeight;
+
+  ///Use safe area to position subtitles
+  final bool useSafeArea;
+
   ///Text alignment of the subtitle when the subtitle spans more than one line
   final TextAlign textAlign;
 
@@ -53,6 +59,8 @@ class BetterPlayerSubtitlesConfiguration {
     this.textAlign = TextAlign.center,
     this.alignment = Alignment.center,
     this.backgroundColor = Colors.transparent,
+    this.playerHeight = 30.0,
+    this.useSafeArea = true,
   });
 
   @override
@@ -70,7 +78,9 @@ class BetterPlayerSubtitlesConfiguration {
         bottomPadding == other.bottomPadding &&
         textAlign == other.textAlign &&
         alignment == other.alignment &&
-        backgroundColor == other.backgroundColor;
+        backgroundColor == other.backgroundColor &&
+        playerHeight == other.playerHeight &&
+        useSafeArea == other.useSafeArea;
   }
 
   @override
@@ -87,5 +97,7 @@ class BetterPlayerSubtitlesConfiguration {
         textAlign,
         alignment,
         backgroundColor,
+        playerHeight,
+        useSafeArea,
       );
 }

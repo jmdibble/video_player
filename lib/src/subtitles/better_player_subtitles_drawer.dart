@@ -132,17 +132,23 @@ class _BetterPlayerSubtitlesDrawerState
     return Container(
       height: double.infinity,
       width: double.infinity,
-      child: Padding(
-        padding: EdgeInsets.only(
-          bottom: _playerVisible
-              ? _configuration!.bottomPadding + 30
-              : _configuration!.bottomPadding,
-          left: _configuration!.leftPadding,
-          right: _configuration!.rightPadding,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: textWidgets,
+      child: SafeArea(
+        bottom: _configuration!.useSafeArea,
+        left: _configuration!.useSafeArea,
+        right: _configuration!.useSafeArea,
+        top: _configuration!.useSafeArea,
+        child: Padding(
+          padding: EdgeInsets.only(
+            bottom: _playerVisible
+                ? _configuration!.bottomPadding + _configuration!.playerHeight
+                : _configuration!.bottomPadding,
+            left: _configuration!.leftPadding,
+            right: _configuration!.rightPadding,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: textWidgets,
+          ),
         ),
       ),
     );
