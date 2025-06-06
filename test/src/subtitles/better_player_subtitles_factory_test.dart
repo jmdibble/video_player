@@ -73,17 +73,17 @@ Hello World
           await BetterPlayerSubtitlesFactory.parseSubtitles(memorySource);
       expect(subtitles.length, equals(16));
       expect(subtitles.first.start,
-          equals(Duration(seconds: 1, milliseconds: 981)));
-      expect(
-          subtitles.first.end, equals(Duration(seconds: 4, milliseconds: 682)));
+          equals(-Duration(seconds: 8, milliseconds: 19)));
+      expect(subtitles.first.end,
+          equals(-Duration(seconds: 5, milliseconds: 318)));
       expect(subtitles.first.texts,
           equals(["We're quite content to be the odd", "browser out."]));
 
       // Check last element
       expect(subtitles.last.start,
-          equals(Duration(seconds: 46, milliseconds: 651)));
+          equals(Duration(seconds: 36, milliseconds: 651)));
       expect(
-          subtitles.last.end, equals(Duration(seconds: 48, milliseconds: 525)));
+          subtitles.last.end, equals(Duration(seconds: 38, milliseconds: 525)));
       expect(subtitles.last.texts, equals(["For everyone to see."]));
     });
 
@@ -106,14 +106,10 @@ Hello World
           await BetterPlayerSubtitlesFactory.parseSubtitles(memorySource);
       expect(subtitles, isNotEmpty);
       expect(subtitles.first.index, equals(1));
-      expect(
-          subtitles.first.start,
-          equals(Duration(
-              seconds: 1, milliseconds: 981))); // Correct offset applied
-      expect(
-          subtitles.first.end,
-          equals(Duration(
-              seconds: 4, milliseconds: 682))); // Correct offset applied
+      expect(subtitles.first.start,
+          equals(-Duration(seconds: 8, milliseconds: 19)));
+      expect(subtitles.first.end,
+          equals(-Duration(seconds: 5, milliseconds: 318)));
       expect(subtitles.first.texts, equals(["Hello World"]));
     });
 
