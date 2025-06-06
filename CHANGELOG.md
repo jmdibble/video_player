@@ -1,3 +1,10 @@
+### 1.0.10
+
+**Bug Fixes**
+
+- subtitles offset calculation will ignore MPEGTS now as we cannot determine the offset in relation to presentation-time-stamp
+
+
 ### 1.0.9
 
 **Refactor**
