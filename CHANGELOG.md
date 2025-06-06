@@ -1,3 +1,20 @@
+### 1.0.9
+
+**Bug Fixes**
+
+- use correct foreground service type android:foregroundServiceType='mediaPlayback' and permission android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK (fixes #2) (#33)
+- handle HLS and Dash video formats in example app (#35)
+- make android build work again, update Java to 17, update AGP to 8.7.3, update gradle wrapper to 8.12 (#34)
+
+**Refactor**
+
+- for network data source set default format to hls for .m3u8 and dash for .mpd urls
+- **example**: use .network constructor for data sources
+- **subtitles**: handle WEBVTT timestamps, add tests
+
+**From upstream**
+- Enhance WebVTT parsing with rejection criteria and tests ([#32](https://github.com/nateshmbhat/awesome_video_player/pull/32))
+
 ### 1.0.8
 
 **Features**
