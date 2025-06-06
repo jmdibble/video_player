@@ -103,4 +103,25 @@ X-TIMESTAMP-MAP=INVALID
       expect(offset, isNull);
     });
   });
+
+  group('stringToDuration', () {
+    test('parses duration', () {
+      expect(
+        BetterPlayerSubtitle.stringToDuration('00:00:10.000'),
+        equals(Duration(seconds: 10)),
+      );
+      expect(
+        BetterPlayerSubtitle.stringToDuration('00:01:00.000'),
+        equals(Duration(minutes: 1)),
+      );
+      expect(
+        BetterPlayerSubtitle.stringToDuration('01:00:00.000'),
+        equals(Duration(hours: 1)),
+      );
+      expect(
+        BetterPlayerSubtitle.stringToDuration('00:00:00.000'),
+        equals(Duration.zero),
+      );
+    });
+  });
 }

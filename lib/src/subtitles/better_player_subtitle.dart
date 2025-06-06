@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:video_player/src/core/better_player_utils.dart';
 
 class BetterPlayerSubtitle {
@@ -85,8 +86,8 @@ class BetterPlayerSubtitle {
   ]) {
     try {
       final timeSplit = scanner[0].split(timerSeparator);
-      final start = _stringToDuration(timeSplit[0]) - (offset ?? Duration.zero);
-      final end = _stringToDuration(timeSplit[1]) - (offset ?? Duration.zero);
+      final start = stringToDuration(timeSplit[0]) - (offset ?? Duration.zero);
+      final end = stringToDuration(timeSplit[1]) - (offset ?? Duration.zero);
       final texts = scanner
           .sublist(1, scanner.length)
           .where((text) => text.trim().isNotEmpty)
@@ -122,8 +123,8 @@ class BetterPlayerSubtitle {
         firstLineOfText = 2;
       }
 
-      final start = _stringToDuration(timeSplit[0]) - (offset ?? Duration.zero);
-      final end = _stringToDuration(timeSplit[1]) - (offset ?? Duration.zero);
+      final start = stringToDuration(timeSplit[0]) - (offset ?? Duration.zero);
+      final end = stringToDuration(timeSplit[1]) - (offset ?? Duration.zero);
       final texts = scanner
           .sublist(firstLineOfText, scanner.length)
           .where((text) => text.trim().isNotEmpty)
@@ -140,6 +141,9 @@ class BetterPlayerSubtitle {
     }
   }
 
+  /// This is not fully compliant with the WebVTT specification,
+  /// as we don't have information about presentation-time-stamp of the frame.
+  /// So we're not going to offset the subtitle by MPEGTS but only by LOCAL time.
   static Duration? parseOffset(String header) {
     try {
       if (header.contains("X-TIMESTAMP-MAP=")) {
@@ -150,16 +154,14 @@ class BetterPlayerSubtitle {
             parts.firstWhereOrNull((part) => part.startsWith("LOCAL:"));
 
         if (mpegTsPart == null || localPart == null) {
-          return null; // Invalid format, return null
+          return null;
         }
 
-        final mpegTsValue = int.tryParse(mpegTsPart.split(":")[1]) ?? 0;
-        final localValue = _stringToDuration(localPart.split(":")[1]);
+        // final mpegTsValue = int.tryParse(mpegTsPart.split(":")[1]) ?? 0;
+        final localValue = stringToDuration(localPart.split("LOCAL:")[1]);
 
-        // Calculate offset: MPEGTS in seconds minus LOCAL time
-        final mpegTsInSeconds =
-            Duration(milliseconds: (mpegTsValue / 90).round());
-        return mpegTsInSeconds - localValue;
+        // final mpegTsInSeconds = Duration.zero;
+        return localValue;
       }
     } on Exception catch (_) {
       BetterPlayerUtils.log("Failed to parse offset from header: $header");
@@ -167,7 +169,8 @@ class BetterPlayerSubtitle {
     return null;
   }
 
-  static Duration _stringToDuration(String value) {
+  @visibleForTesting
+  static Duration stringToDuration(String value) {
     try {
       final valueSplit = value.split(" ");
       String componentValue;

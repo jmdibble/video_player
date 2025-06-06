@@ -102,8 +102,8 @@ class BetterPlayerSubtitlesFactory {
 
     final firstTwoLines = components.sublist(0, min(components.length, 2));
 
-    final bool isWebVTT = firstTwoLines.contains("WEBVTT") ||
-        components.any((c) => c.trim().startsWith("WEBVTT"));
+    final bool isWebVTT = firstTwoLines.any((c) => c.contains("WEBVTT")) ||
+        firstTwoLines.any((c) => c.trim().startsWith("WEBVTT"));
 
     final Duration? offset =
         isWebVTT ? BetterPlayerSubtitle.parseOffset(components.first) : null;
