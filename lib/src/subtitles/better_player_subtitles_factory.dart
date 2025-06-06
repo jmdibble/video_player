@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:video_player/video_player.dart';
 import 'package:video_player/src/core/better_player_utils.dart';
 import 'better_player_subtitle.dart';
@@ -58,6 +59,8 @@ class BetterPlayerSubtitlesFactory {
         });
         final response = await request.close();
         final data = await response.transform(const Utf8Decoder()).join();
+        BetterPlayerUtils.log("Parsed subtitles: $data");
+
         final cacheList = _parseString(data);
         subtitles.addAll(cacheList);
       }
@@ -97,12 +100,18 @@ class BetterPlayerSubtitlesFactory {
 
     final List<BetterPlayerSubtitle> subtitlesObj = [];
 
-    final bool isWebVTT = components.contains("WEBVTT");
+    final firstTwoLines = components.sublist(0, min(components.length, 2));
+    final bool isWebVTT = firstTwoLines.any((s) => s.contains("WEBVTT"));
+    final Duration? offset =
+        isWebVTT ? BetterPlayerSubtitle.parseOffset(components.first) : null;
+    if (offset != null) {
+      BetterPlayerUtils.log("Parsed subtitles offset: $offset");
+    }
     for (final component in components) {
-      if (component.isEmpty) {
+      if (component.isEmpty || component.contains("WEBVTT")) {
         continue;
       }
-      final subtitle = BetterPlayerSubtitle(component, isWebVTT);
+      final subtitle = BetterPlayerSubtitle(component, isWebVTT, offset);
       if (subtitle.start != null &&
           subtitle.end != null &&
           subtitle.texts != null) {

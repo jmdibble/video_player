@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:video_player/src/core/better_player_utils.dart';
 
 class BetterPlayerSubtitle {
@@ -7,19 +8,28 @@ class BetterPlayerSubtitle {
   final Duration? end;
   final List<String>? texts;
 
-  BetterPlayerSubtitle._({this.index, this.start, this.end, this.texts});
+  BetterPlayerSubtitle._({
+    this.index,
+    this.start,
+    this.end,
+    this.texts,
+  });
 
-  factory BetterPlayerSubtitle(String value, bool isWebVTT) {
+  factory BetterPlayerSubtitle(
+    String value,
+    bool isWebVTT, [
+    Duration? offset,
+  ]) {
     try {
       final scanner = value.split('\n');
       if (scanner.isNotEmpty && scanner[0] == 'WEBVTT') {
         return BetterPlayerSubtitle._();
       }
       if (scanner.length == 2) {
-        return _handle2LinesSubtitles(scanner);
+        return _handle2LinesSubtitles(scanner, offset);
       }
       if (scanner.length > 2) {
-        return _handle3LinesAndMoreSubtitles(scanner, isWebVTT);
+        return _handle3LinesAndMoreSubtitles(scanner, isWebVTT, offset);
       }
       return BetterPlayerSubtitle._();
     } on Exception catch (_) {
@@ -28,12 +38,18 @@ class BetterPlayerSubtitle {
     }
   }
 
-  static BetterPlayerSubtitle _handle2LinesSubtitles(List<String> scanner) {
+  static BetterPlayerSubtitle _handle2LinesSubtitles(
+    List<String> scanner, [
+    Duration? offset,
+  ]) {
     try {
       final timeSplit = scanner[0].split(timerSeparator);
-      final start = _stringToDuration(timeSplit[0]);
-      final end = _stringToDuration(timeSplit[1]);
-      final texts = scanner.sublist(1, scanner.length);
+      final start = _stringToDuration(timeSplit[0]) - (offset ?? Duration.zero);
+      final end = _stringToDuration(timeSplit[1]) - (offset ?? Duration.zero);
+      final texts = scanner
+          .sublist(1, scanner.length)
+          .where((text) => text.trim().isNotEmpty)
+          .toList();
 
       return BetterPlayerSubtitle._(
         index: -1,
@@ -49,8 +65,9 @@ class BetterPlayerSubtitle {
 
   static BetterPlayerSubtitle _handle3LinesAndMoreSubtitles(
     List<String> scanner,
-    bool isWebVTT,
-  ) {
+    bool isWebVTT, [
+    Duration? offset,
+  ]) {
     try {
       int? index = -1;
       List<String> timeSplit = [];
@@ -64,9 +81,12 @@ class BetterPlayerSubtitle {
         firstLineOfText = 2;
       }
 
-      final start = _stringToDuration(timeSplit[0]);
-      final end = _stringToDuration(timeSplit[1]);
-      final texts = scanner.sublist(firstLineOfText, scanner.length);
+      final start = _stringToDuration(timeSplit[0]) - (offset ?? Duration.zero);
+      final end = _stringToDuration(timeSplit[1]) - (offset ?? Duration.zero);
+      final texts = scanner
+          .sublist(firstLineOfText, scanner.length)
+          .where((text) => text.trim().isNotEmpty)
+          .toList();
       return BetterPlayerSubtitle._(
         index: index,
         start: start,
@@ -77,6 +97,33 @@ class BetterPlayerSubtitle {
       BetterPlayerUtils.log("Failed to parse subtitle line: $scanner");
       return BetterPlayerSubtitle._();
     }
+  }
+
+  static Duration? parseOffset(String header) {
+    try {
+      if (header.contains("X-TIMESTAMP-MAP=")) {
+        final parts = header.split("X-TIMESTAMP-MAP=")[1].split(',');
+        final mpegTsPart =
+            parts.firstWhereOrNull((part) => part.startsWith("MPEGTS:"));
+        final localPart =
+            parts.firstWhereOrNull((part) => part.startsWith("LOCAL:"));
+
+        if (mpegTsPart == null || localPart == null) {
+          return null; // Invalid format, return null
+        }
+
+        final mpegTsValue = int.tryParse(mpegTsPart.split(":")[1]) ?? 0;
+        final localValue = _stringToDuration(localPart.split(":")[1]);
+
+        // Calculate offset: MPEGTS in seconds minus LOCAL time
+        final mpegTsInSeconds =
+            Duration(milliseconds: (mpegTsValue / 90).round());
+        return mpegTsInSeconds - localValue;
+      }
+    } on Exception catch (_) {
+      BetterPlayerUtils.log("Failed to parse offset from header: $header");
+    }
+    return null;
   }
 
   static Duration _stringToDuration(String value) {

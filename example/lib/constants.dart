@@ -12,6 +12,22 @@ class Constants {
       "https://mtoczko.github.io/hls-test-streams/test-group/playlist.m3u8";
   static const String hlsPlaylistUrl =
       "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8";
+
+  /// vtt + ts
+  /// https://mtoczko.github.io/hls-test-streams/test-vtt-ts-segments/playlist.m3u8
+  static const String vttTsSegmentsUrl =
+      "https://mtoczko.github.io/hls-test-streams/test-vtt-ts-segments/playlist.m3u8";
+
+  /// vtt + fmp4
+  /// https://mtoczko.github.io/hls-test-streams/test-vtt-fmp4-segments/playlist.m3u8
+  static const String vttFmp4SegmentsUrl =
+      "https://mtoczko.github.io/hls-test-streams/test-vtt-fmp4-segments/playlist.m3u8";
+
+  /// vtt + x-map
+  /// https://mtoczko.github.io/hls-test-streams/test-vtt-x-map/playlist.m3u8
+  static const String vttXMapUrl =
+      "https://mtoczko.github.io/hls-test-streams/test-vtt-x-map/playlist.m3u8";
+
   static const Map<String, String> exampleResolutionsUrls = {
     "LOW":
         "https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_480_1_5MG.mp4",

@@ -3,6 +3,15 @@ import 'package:video_player_example/constants.dart';
 import 'package:flutter/material.dart';
 
 class HlsSubtitlesPage extends StatefulWidget {
+  final String url;
+  final String extreDesc;
+
+  const HlsSubtitlesPage({
+    super.key,
+    required this.url,
+    required this.extreDesc,
+  });
+
   @override
   _HlsSubtitlesPageState createState() => _HlsSubtitlesPageState();
 }
@@ -12,6 +21,7 @@ class _HlsSubtitlesPageState extends State<HlsSubtitlesPage> {
 
   @override
   void initState() {
+    super.initState();
     BetterPlayerControlsConfiguration controlsConfiguration =
         BetterPlayerControlsConfiguration(
       controlBarColor: Colors.black26,
@@ -52,13 +62,12 @@ class _HlsSubtitlesPageState extends State<HlsSubtitlesPage> {
       ),
     );
     BetterPlayerDataSource dataSource = BetterPlayerDataSource.network(
-      Constants.hlsPlaylistUrl,
+      widget.url,
       useAsmsSubtitles: true,
       videoFormat: BetterPlayerVideoFormat.hls,
     );
     _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
     _betterPlayerController.setupDataSource(dataSource);
-    super.initState();
   }
 
   @override
@@ -67,14 +76,25 @@ class _HlsSubtitlesPageState extends State<HlsSubtitlesPage> {
       appBar: AppBar(title: Text("HLS subtitles")),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 8),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                "Player with HLS stream which loads subtitles from HLS."
-                " You can choose subtitles by using overflow menu (3 dots in right corner).",
+                "Player with HLS stream which loads subtitles from HLS. "
+                "You can choose subtitles by using overflow menu (3 dots in right corner).",
                 style: TextStyle(fontSize: 16),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                widget.extreDesc,
+                style: TextStyle(fontSize: 16),
+                textAlign: TextAlign.left,
               ),
             ),
             AspectRatio(

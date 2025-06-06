@@ -90,8 +90,33 @@ class _WelcomePageState extends State<WelcomePage> {
       _buildExampleElementWidget("Resolutions", () {
         _navigateToPage(ResolutionsPage());
       }),
-      _buildExampleElementWidget("HLS subtitles", () {
-        _navigateToPage(HlsSubtitlesPage());
+      _buildExampleElementWidget("HLS subtitles og", () {
+        _navigateToPage(HlsSubtitlesPage(
+          url: Constants.hlsPlaylistUrl,
+          extreDesc: 'Normal HLS subtitles without offset.',
+        ));
+      }),
+      _buildExampleElementWidget("HLS subtitles vtt", () {
+        _navigateToPage(HlsSubtitlesPage(
+          url: Constants.vttTsSegmentsUrl,
+          extreDesc: 'HLS subtitles with vtt segments and ts segments. '
+              'Offset by 10 seconds.',
+        ));
+      }),
+      _buildExampleElementWidget("HLS subtitles vtt + fmp4", () {
+        _navigateToPage(HlsSubtitlesPage(
+          url: Constants.vttFmp4SegmentsUrl,
+          extreDesc: 'HLS subtitles with vtt segments and fmp4 segments. '
+              'Offset by 10 seconds.',
+        ));
+      }),
+      _buildExampleElementWidget(
+          "HLS subtitles vtt vtt + x-map - not supported", () {
+        _navigateToPage(HlsSubtitlesPage(
+          url: Constants.vttXMapUrl,
+          extreDesc: 'HLS subtitles with vtt segments and x-map segments. '
+              'Currently not supported as the subtitles header is not parsed.',
+        ));
       }),
       _buildExampleElementWidget("HLS tracks", () {
         _navigateToPage(HlsTracksPage());
