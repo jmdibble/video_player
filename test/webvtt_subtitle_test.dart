@@ -1,5 +1,5 @@
-import 'package:awesome_video_player/src/subtitles/better_player_subtitle.dart';
-import 'package:awesome_video_player/src/subtitles/better_player_subtitles_factory.dart';
+import 'package:video_player/src/subtitles/better_player_subtitle.dart';
+import 'package:video_player/src/subtitles/better_player_subtitles_factory.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
