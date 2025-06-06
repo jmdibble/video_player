@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:video_player/video_player.dart';
 import 'package:video_player/src/core/better_player_utils.dart';
 import 'better_player_subtitle.dart';
@@ -30,7 +31,7 @@ class BetterPlayerSubtitlesFactory {
         final file = File(url!);
         if (file.existsSync()) {
           final String fileContent = await file.readAsString();
-          final subtitlesCache = _parseString(fileContent);
+          final subtitlesCache = parseString(fileContent);
           subtitles.addAll(subtitlesCache);
         } else {
           BetterPlayerUtils.log("$url doesn't exist!");
@@ -59,9 +60,7 @@ class BetterPlayerSubtitlesFactory {
         });
         final response = await request.close();
         final data = await response.transform(const Utf8Decoder()).join();
-        BetterPlayerUtils.log("Parsed subtitles: $data");
-
-        final cacheList = _parseString(data);
+        final cacheList = parseString(data);
         subtitles.addAll(cacheList);
       }
       client.close();
@@ -80,14 +79,15 @@ class BetterPlayerSubtitlesFactory {
     BetterPlayerSubtitlesSource source,
   ) {
     try {
-      return _parseString(source.content!);
+      return parseString(source.content!);
     } on Exception catch (exception) {
       BetterPlayerUtils.log("Failed to read subtitles from memory: $exception");
     }
     return [];
   }
 
-  static List<BetterPlayerSubtitle> _parseString(String value) {
+  @visibleForTesting
+  static List<BetterPlayerSubtitle> parseString(String value) {
     List<String> components = value.split('\r\n\r\n');
     if (components.length == 1) {
       components = value.split('\n\n');
@@ -101,16 +101,26 @@ class BetterPlayerSubtitlesFactory {
     final List<BetterPlayerSubtitle> subtitlesObj = [];
 
     final firstTwoLines = components.sublist(0, min(components.length, 2));
-    final bool isWebVTT = firstTwoLines.any((s) => s.contains("WEBVTT"));
+
+    final bool isWebVTT = firstTwoLines.contains("WEBVTT") ||
+        components.any((c) => c.trim().startsWith("WEBVTT"));
+
     final Duration? offset =
         isWebVTT ? BetterPlayerSubtitle.parseOffset(components.first) : null;
     if (offset != null) {
       BetterPlayerUtils.log("Parsed subtitles offset: $offset");
     }
+
     for (final component in components) {
       if (component.isEmpty || component.contains("WEBVTT")) {
         continue;
       }
+
+      // Skip WebVTT header and metadata sections
+      if (isWebVTT && BetterPlayerSubtitle.shouldRejectWebVTTBlock(component)) {
+        continue;
+      }
+
       final subtitle = BetterPlayerSubtitle(component, isWebVTT, offset);
       if (subtitle.start != null &&
           subtitle.end != null &&
