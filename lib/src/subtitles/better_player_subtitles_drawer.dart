@@ -62,6 +62,7 @@ class _BetterPlayerSubtitlesDrawerState
     _outerTextStyle = TextStyle(
       fontSize: _configuration!.fontSize,
       fontFamily: _configuration!.fontFamily,
+      fontWeight: _configuration!.fontWeight,
       foreground: Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = _configuration!.outlineSize
@@ -72,6 +73,7 @@ class _BetterPlayerSubtitlesDrawerState
       fontFamily: _configuration!.fontFamily,
       color: _configuration!.fontColor,
       fontSize: _configuration!.fontSize,
+      fontWeight: _configuration!.fontWeight,
     );
   }
 

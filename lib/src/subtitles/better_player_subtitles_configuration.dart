@@ -22,6 +22,9 @@ class BetterPlayerSubtitlesConfiguration {
   ///Font family of the subtitle
   final String fontFamily;
 
+  ///Font weight of the subtitle
+  final FontWeight fontWeight;
+
   ///Left padding of the subtitle
   final double leftPadding;
 
@@ -55,6 +58,7 @@ class BetterPlayerSubtitlesConfiguration {
   const BetterPlayerSubtitlesConfiguration({
     this.fontSize = 14,
     this.fontColor = Colors.white,
+    this.fontWeight = FontWeight.normal,
     this.outlineEnabled = true,
     this.outlineColor = Colors.black,
     this.outlineSize = 2.0,
@@ -77,6 +81,7 @@ class BetterPlayerSubtitlesConfiguration {
     if (other is! BetterPlayerSubtitlesConfiguration) return false;
     return fontSize == other.fontSize &&
         fontColor == other.fontColor &&
+        fontWeight == other.fontWeight &&
         outlineEnabled == other.outlineEnabled &&
         outlineColor == other.outlineColor &&
         outlineSize == other.outlineSize &&
@@ -97,6 +102,7 @@ class BetterPlayerSubtitlesConfiguration {
   int get hashCode => Object.hash(
         fontSize,
         fontColor,
+        fontWeight,
         outlineEnabled,
         outlineColor,
         outlineSize,
