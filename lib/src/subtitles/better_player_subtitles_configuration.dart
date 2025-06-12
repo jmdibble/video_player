@@ -40,18 +40,6 @@ class BetterPlayerSubtitlesConfiguration {
   ///Curve of the padding animation when the subtitle moving
   final Curve paddingAnimationCurve;
 
-  ///Duration of the opacity animation when the subtitles appear or disappear
-  ///after toggling.
-  final Duration opacityAnimationDuration;
-
-  ///Curve of the opacity animation when the subtitles appear or disappear
-  final Curve opacityAnimationCurve;
-
-  ///Opacity of the subtitle when it is visible
-  ///(default is 1.0, which means fully visible).
-  ///Affects entire widget including background.
-  final double opacity;
-
   ///Height of the player, used to calculate subtitle position
   final double playerHeight;
 
@@ -85,9 +73,6 @@ class BetterPlayerSubtitlesConfiguration {
     this.useSafeArea = true,
     this.paddingAnimationDuration = const Duration(milliseconds: 300),
     this.paddingAnimationCurve = Curves.easeInOut,
-    this.opacityAnimationDuration = const Duration(milliseconds: 300),
-    this.opacityAnimationCurve = Curves.easeInOut,
-    this.opacity = 1.0,
   });
 
   @override
@@ -110,10 +95,7 @@ class BetterPlayerSubtitlesConfiguration {
         playerHeight == other.playerHeight &&
         useSafeArea == other.useSafeArea &&
         paddingAnimationDuration == other.paddingAnimationDuration &&
-        paddingAnimationCurve == other.paddingAnimationCurve &&
-        opacityAnimationDuration == other.opacityAnimationDuration &&
-        opacityAnimationCurve == other.opacityAnimationCurve &&
-        opacity == other.opacity;
+        paddingAnimationCurve == other.paddingAnimationCurve;
   }
 
   @override
@@ -135,8 +117,5 @@ class BetterPlayerSubtitlesConfiguration {
         useSafeArea,
         paddingAnimationDuration,
         paddingAnimationCurve,
-        opacityAnimationDuration,
-        opacityAnimationCurve,
-        opacity,
       );
 }

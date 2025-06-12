@@ -31,7 +31,6 @@ class _BetterPlayerSubtitlesDrawerState
   VideoPlayerValue? _latestValue;
   BetterPlayerSubtitlesConfiguration? _configuration;
   bool _playerVisible = false;
-  bool _subtilesEnabled = false;
 
   ///Stream used to detect if play controls are visible or not
   late StreamSubscription _visibilityStreamSubscription;
@@ -120,9 +119,6 @@ class _BetterPlayerSubtitlesDrawerState
       setState(() {
         _latestValue =
             widget.betterPlayerController.videoPlayerController!.value;
-        _subtilesEnabled =
-            widget.betterPlayerController.betterPlayerSubtitlesSource?.type !=
-                BetterPlayerSubtitlesSourceType.none;
       });
     }
   }
@@ -141,24 +137,19 @@ class _BetterPlayerSubtitlesDrawerState
         left: _configuration!.useSafeArea,
         right: _configuration!.useSafeArea,
         top: _configuration!.useSafeArea,
-        child: AnimatedOpacity(
-          duration: _configuration!.opacityAnimationDuration,
-          curve: _configuration!.opacityAnimationCurve,
-          opacity: _subtilesEnabled ? _configuration!.opacity : 0.0,
-          child: AnimatedPadding(
-            duration: _configuration!.paddingAnimationDuration,
-            curve: _configuration!.paddingAnimationCurve,
-            padding: EdgeInsets.only(
-              bottom: _playerVisible
-                  ? _configuration!.bottomPadding + _configuration!.playerHeight
-                  : _configuration!.bottomPadding,
-              left: _configuration!.leftPadding,
-              right: _configuration!.rightPadding,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: textWidgets,
-            ),
+        child: AnimatedPadding(
+          duration: _configuration!.paddingAnimationDuration,
+          curve: _configuration!.paddingAnimationCurve,
+          padding: EdgeInsets.only(
+            bottom: _playerVisible
+                ? _configuration!.bottomPadding + _configuration!.playerHeight
+                : _configuration!.bottomPadding,
+            left: _configuration!.leftPadding,
+            right: _configuration!.rightPadding,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: textWidgets,
           ),
         ),
       ),
