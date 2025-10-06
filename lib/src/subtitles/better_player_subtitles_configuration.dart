@@ -55,6 +55,9 @@ class BetterPlayerSubtitlesConfiguration {
   ///Background color of the subtitle
   final Color backgroundColor;
 
+  ///Border radius of the subtitle background
+  final BorderRadiusGeometry backgroundBorderRadius;
+
   const BetterPlayerSubtitlesConfiguration({
     this.fontSize = 14,
     this.fontColor = Colors.white,
@@ -73,6 +76,7 @@ class BetterPlayerSubtitlesConfiguration {
     this.useSafeArea = true,
     this.paddingAnimationDuration = const Duration(milliseconds: 300),
     this.paddingAnimationCurve = Curves.easeInOut,
+    this.backgroundBorderRadius = BorderRadius.zero,
   });
 
   @override
@@ -95,7 +99,8 @@ class BetterPlayerSubtitlesConfiguration {
         playerHeight == other.playerHeight &&
         useSafeArea == other.useSafeArea &&
         paddingAnimationDuration == other.paddingAnimationDuration &&
-        paddingAnimationCurve == other.paddingAnimationCurve;
+        paddingAnimationCurve == other.paddingAnimationCurve &&
+        backgroundBorderRadius == other.backgroundBorderRadius;
   }
 
   @override
@@ -117,5 +122,6 @@ class BetterPlayerSubtitlesConfiguration {
         useSafeArea,
         paddingAnimationDuration,
         paddingAnimationCurve,
+        backgroundBorderRadius,
       );
 }

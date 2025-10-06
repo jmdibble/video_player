@@ -18,12 +18,10 @@ class BetterPlayerSubtitlesDrawer extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _BetterPlayerSubtitlesDrawerState createState() =>
-      _BetterPlayerSubtitlesDrawerState();
+  _BetterPlayerSubtitlesDrawerState createState() => _BetterPlayerSubtitlesDrawerState();
 }
 
-class _BetterPlayerSubtitlesDrawerState
-    extends State<BetterPlayerSubtitlesDrawer> {
+class _BetterPlayerSubtitlesDrawerState extends State<BetterPlayerSubtitlesDrawer> {
   final RegExp htmlRegExp = RegExp(r"<[^>]*>", multiLine: true);
   late TextStyle _innerTextStyle;
   late TextStyle _outerTextStyle;
@@ -80,8 +78,7 @@ class _BetterPlayerSubtitlesDrawerState
   @override
   void didUpdateWidget(covariant BetterPlayerSubtitlesDrawer oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.betterPlayerSubtitlesConfiguration !=
-        widget.betterPlayerSubtitlesConfiguration) {
+    if (oldWidget.betterPlayerSubtitlesConfiguration != widget.betterPlayerSubtitlesConfiguration) {
       _initializeConfiguration();
     }
     if (oldWidget.betterPlayerController != widget.betterPlayerController) {
@@ -117,8 +114,7 @@ class _BetterPlayerSubtitlesDrawerState
   void _updateState() {
     if (mounted) {
       setState(() {
-        _latestValue =
-            widget.betterPlayerController.videoPlayerController!.value;
+        _latestValue = widget.betterPlayerController.videoPlayerController!.value;
       });
     }
   }
@@ -128,10 +124,9 @@ class _BetterPlayerSubtitlesDrawerState
     final BetterPlayerSubtitle? subtitle = _getSubtitleAtCurrentPosition();
     widget.betterPlayerController.renderedSubtitle = subtitle;
     final List<String> subtitles = subtitle?.texts ?? [];
-    final List<Widget> textWidgets =
-        subtitles.map((text) => _buildSubtitleTextWidget(text)).toList();
+    final List<Widget> textWidgets = subtitles.map((text) => _buildSubtitleTextWidget(text)).toList();
 
-    return SizedBox.expand(
+    return SizedBox(
       child: SafeArea(
         bottom: _configuration!.useSafeArea,
         left: _configuration!.useSafeArea,
@@ -162,8 +157,7 @@ class _BetterPlayerSubtitlesDrawerState
     }
 
     final Duration position = _latestValue!.position;
-    for (final BetterPlayerSubtitle subtitle
-        in widget.betterPlayerController.subtitlesLines) {
+    for (final BetterPlayerSubtitle subtitle in widget.betterPlayerController.subtitlesLines) {
       if (subtitle.start! <= position && subtitle.end! >= position) {
         return subtitle;
       }
@@ -172,21 +166,28 @@ class _BetterPlayerSubtitlesDrawerState
   }
 
   Widget _buildSubtitleTextWidget(String subtitleText) {
-    return Row(
-      children: [
-        Expanded(
-          child: Align(
-            alignment: _configuration!.alignment,
-            child: _getTextWithStroke(subtitleText),
+    return Center(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Flexible(
+            child: Align(
+              alignment: _configuration!.alignment,
+              child: _getTextWithStroke(subtitleText),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   Widget _getTextWithStroke(String subtitleText) {
     return Container(
-      color: _configuration!.backgroundColor,
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      decoration: BoxDecoration(
+        color: _configuration!.backgroundColor,
+        borderRadius: _configuration!.backgroundBorderRadius,
+      ),
       child: Stack(
         children: [
           if (_configuration!.outlineEnabled)
